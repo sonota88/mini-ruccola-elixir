@@ -1,7 +1,8 @@
 require "rake/clean"
 
 C_RESET = "\e[m"
-C_RED = "\e[0;31m"
+C_ERR  = "\e[0;31m" # red
+C_WARN = "\e[0;33m" # yellow
 
 DEPS = {
   "build/Elixir.Utils.beam" => [
@@ -67,19 +68,17 @@ DEPS.each do |dest, srcs|
     sh cmd do |ok, status|
       out = File.read(f_out)
 
-      if ok
-        print out
-      else
-        out.each_line do |line|
-          if %r{: error CS} =~ line
-            print C_RED
-            print line.chomp
-            print C_RESET
-            print "\n"
-          else
-            puts line
-          end
+      out.each_line do |line|
+        if %r{^error: } =~ line
+          print [C_ERR, line.chomp, C_RESET, "\n"].join
+        elsif %r{^warning: } =~ line
+          print [C_WARN, line.chomp, C_RESET, "\n"].join
+        else
+          puts line
         end
+      end
+
+      unless ok
         exit status.exitstatus
       end
     end

@@ -25,13 +25,13 @@ defmodule Utils do
     end
   end
 
-  defp str_get_head(str, i), do: String.slice(str, 0..(i - 1))
-  defp str_get_tail(str, i), do: String.slice(str, i..-1)
+  defp str_partition_hd(str, i), do: String.slice(str, 0..(i - 1))
+  defp str_partition_tl(str, i), do: String.slice(str, i..-1)
 
   def str_partition(str, i) do
     {
-      str_get_head(str, i),
-      str_get_tail(str, i)
+      str_partition_hd(str, i),
+      str_partition_tl(str, i)
     }
   end
 
