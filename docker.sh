@@ -2,7 +2,7 @@
 
 set -o nounset
 
-readonly IMAGE=mini-ruccola-elixir:3
+readonly IMAGE=mini-ruccola-elixir:4
 
 cmd_build() {
   docker build \

@@ -26,7 +26,7 @@ defmodule Utils do
   end
 
   defp str_partition_hd(str, i), do: String.slice(str, 0..(i - 1))
-  defp str_partition_tl(str, i), do: String.slice(str, i..-1)
+  defp str_partition_tl(str, i), do: String.slice(str, i..-1//1)
 
   def str_partition(str, i) do
     {
