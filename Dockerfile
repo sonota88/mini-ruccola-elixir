@@ -49,8 +49,8 @@ RUN asdf plugin add erlang \
   && asdf set --home erlang 26.0.2
 
 RUN asdf plugin add elixir \
-  && asdf install elixir 1.16.0-otp-26 \
-  && asdf set --home elixir 1.16.0-otp-26
+  && asdf install elixir 1.17.0-otp-26 \
+  && asdf set --home elixir 1.17.0-otp-26
 
 # --------------------------------
 

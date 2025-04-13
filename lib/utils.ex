@@ -5,7 +5,7 @@ defmodule Utils do
   # def puts_kv_e(k, v), do: puts_e("#{k} (#{v})")
 
   def read_stdin_all do
-    case IO.read(:stdio, :all) do
+    case IO.read(:stdio, :eof) do
       { :error, reason } -> raise "failed to read stdin (#{reason})"
       data -> data
     end
