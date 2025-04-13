@@ -14,8 +14,6 @@ RUN apt-get update \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /home/${USER}/work
-
 ARG USER
 ARG GROUP
 
@@ -34,25 +32,29 @@ ENV USER=${USER}
 # --------------------------------
 # asdf
 
-ENV ASDF_DIR="/home/${USER}/.asdf"
+WORKDIR /home/${USER}/bin
 
-RUN git clone https://github.com/asdf-vm/asdf.git $ASDF_DIR --branch v0.13.1
+RUN curl -L https://github.com/asdf-vm/asdf/releases/download/v0.16.7/asdf-v0.16.7-linux-386.tar.gz -o /tmp/asdf.tar.gz \
+  && tar xzf /tmp/asdf.tar.gz \
+  && rm /tmp/asdf.tar.gz
+#=> ~/bin/asdf (executable)
 
-RUN . "/home/${USER}/.asdf/asdf.sh" \
-  && asdf plugin-add erlang \
+ENV PATH="/home/${USER}/bin:${PATH}"
+
+ENV ASDF_DATA_DIR="/home/${USER}/.asdf"
+ENV PATH="${ASDF_DATA_DIR}/shims:${PATH}"
+
+RUN asdf plugin add erlang \
   && asdf install erlang 26.0.2 \
-  && asdf global  erlang 26.0.2
+  && asdf set --home erlang 26.0.2
 
-RUN . "/home/${USER}/.asdf/asdf.sh" \
-  && asdf plugin-add elixir \
+RUN asdf plugin add elixir \
   && asdf install elixir 1.15.7-otp-26 \
-  && asdf global  elixir 1.15.7-otp-26
+  && asdf set --home elixir 1.15.7-otp-26
 
 # --------------------------------
 
 RUN cat <<'SH' >> "/home/${USER}/.bashrc"
-
-. "/home/${USER}/.asdf/asdf.sh"
 
 PS1_ORIG="$PS1"
 

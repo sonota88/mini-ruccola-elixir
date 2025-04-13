@@ -409,7 +409,6 @@ in_container() {
 }
 
 if (in_container); then
-  . "/home/${USER}/.asdf/asdf.sh"
   container_main "$@"
 else
   # Run in container
