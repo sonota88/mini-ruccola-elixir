@@ -45,12 +45,12 @@ ENV ASDF_DATA_DIR="/home/${USER}/.asdf"
 ENV PATH="${ASDF_DATA_DIR}/shims:${PATH}"
 
 RUN asdf plugin add erlang \
-  && asdf install erlang 26.0.2 \
-  && asdf set --home erlang 26.0.2
+  && asdf install erlang 27.3.2 \
+  && asdf set --home erlang 27.3.2
 
 RUN asdf plugin add elixir \
-  && asdf install elixir 1.18.3-otp-26 \
-  && asdf set --home elixir 1.18.3-otp-26
+  && asdf install elixir 1.18.3-otp-27 \
+  && asdf set --home elixir 1.18.3-otp-27
 
 # --------------------------------
 
