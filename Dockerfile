@@ -55,25 +55,6 @@ RUN asdf plugin add elixir \
 
 # --------------------------------
 
-RUN cat <<'SH' >> "/home/${USER}/.bashrc"
-
-PS1_ORIG="$PS1"
-
-export PS1='  ---------------- \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\u@\h:\w\n  \$ '
-SH
-
-RUN cat <<'SH' >> "/home/${USER}/.bash_history"
-rake clean
-rake clean build
-cat test_common/
-cat test_common/compile/01.mrcl 
-./test.sh j 1
-./test.sh l 1
-./test.sh p 1
-./test.sh c 27
-./test.sh a
-SH
-
 WORKDIR /home/${USER}/work
 
 ENV IN_CONTAINER=1
