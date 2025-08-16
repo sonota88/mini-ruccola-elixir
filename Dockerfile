@@ -34,7 +34,8 @@ ENV USER=${USER}
 
 WORKDIR /home/${USER}/bin
 
-RUN curl -L https://github.com/asdf-vm/asdf/releases/download/v0.16.7/asdf-v0.16.7-linux-386.tar.gz -o /tmp/asdf.tar.gz \
+RUN  curl -L https://github.com/asdf-vm/asdf/releases/download/v0.18.0/asdf-v0.18.0-linux-386.tar.gz \
+       -o /tmp/asdf.tar.gz \
   && tar xzf /tmp/asdf.tar.gz \
   && rm /tmp/asdf.tar.gz
 #=> ~/bin/asdf (executable)
@@ -45,12 +46,12 @@ ENV ASDF_DATA_DIR="/home/${USER}/.asdf"
 ENV PATH="${ASDF_DATA_DIR}/shims:${PATH}"
 
 RUN asdf plugin add erlang \
-  && asdf install erlang 27.3.2 \
-  && asdf set --home erlang 27.3.2
+  && asdf install erlang 27.3.4 \
+  && asdf set --home erlang 27.3.4
 
 RUN asdf plugin add elixir \
-  && asdf install elixir 1.18.3-otp-27 \
-  && asdf set --home elixir 1.18.3-otp-27
+  && asdf install elixir 1.18.4-otp-27 \
+  && asdf set --home elixir 1.18.4-otp-27
 
 # --------------------------------
 
