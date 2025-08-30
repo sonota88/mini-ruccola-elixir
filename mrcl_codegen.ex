@@ -10,11 +10,11 @@ defmodule Env do
   end
 
   def fn_arg?(env, name) do
-    Enum.any?(env.fn_args, &(&1 == name))
+    env.fn_args |> Enum.any?(&(&1 == name))
   end
 
   def lvar?(env, name) do
-    Enum.any?(env.lvars, &(&1 == name))
+    env.lvars |> Enum.any?(&(&1 == name))
   end
 
   def fn_arg_disp(env, name) do
