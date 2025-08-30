@@ -58,7 +58,7 @@ defmodule Lexer do
   end
 
   defp rest_type(rest) do
-    if String.length(rest) === 0 do
+    if String.length(rest) == 0 do
       :eof
     else
       case String.slice(rest, 0, 2) do
